@@ -1,0 +1,6 @@
+__pycache__/
+teste.py
+teste2.py
+utils/db_info.py
+utils/key.py
+utils/querys.py
