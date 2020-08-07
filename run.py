@@ -2,7 +2,7 @@ import time as t
 from sendMsg import religacaoComDebito
 
 def main():
-    segundos = 10
+    segundos = 240
     while 1:
         religacaoComDebito.sendAlert()
         for i in range(segundos):
@@ -10,7 +10,20 @@ def main():
                 print(str(segundos-a) + " segundos restantes para proxima busca. \n")
                 t.sleep(1)
             #t.sleep(segundos)
-            religacaoComDebito.sendAlert()
+            try:
+                religacaoComDebito.sendAlert()
+            except:
+                """This aberration is because the telegram server return an error
+                (ProtocolError 10045 conection refused by host remote)´ 
+                and also because this app no can stop by nothing"""
+
+                print('...Conection error with Telegram server')
+                pass
+            finally:
+                t.sleep(60)
+                #sendalert = religacaoComDebito()
+                
+
             print('Busca executada!')
 
 if __name__ == '__main__':
